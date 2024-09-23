@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
-import Navbar from './components/NavBar';
+import FilmsPage from './pages/FilmsPage';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/films" element={<FilmsPage />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

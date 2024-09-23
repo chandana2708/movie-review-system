@@ -42,7 +42,7 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <div> 
       <h1>Browse Movies</h1>
       <div className="movie-list">
         {filteredMovies.map((movie) => (
