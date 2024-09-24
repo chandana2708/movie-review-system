@@ -18,6 +18,7 @@ const LoginModal = ({ show, handleClose }) => {
 
   // Validation schema for signup
   const signupValidationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     confirmPassword: Yup.string()
@@ -34,19 +35,31 @@ const LoginModal = ({ show, handleClose }) => {
       <Modal.Body>
         <Formik
           initialValues={{
+            name: '',
             email: '',
             password: '',
             confirmPassword: isSignup ? '' : undefined,
           }}
           validationSchema={isSignup ? signupValidationSchema : loginValidationSchema}
           onSubmit={(values) => {
-            // Handle form submission
             console.log('Form values:', values);
           }}
         >
           {({ errors, touched }) => (
             <FormikForm>
-              <Form.Group controlId="formEmail">
+              {isSignup && (
+                <Form.Group controlId="formName" className="mt-3">
+                  <Form.Label>Name</Form.Label>
+                  <Field
+                    name="name"
+                    type="text"
+                    className={`form-control ${errors.name && touched.name ? 'is-invalid' : ''}`}
+                  />
+                  <ErrorMessage name="name" component="div" className="invalid-feedback" />
+                </Form.Group>
+              )}
+
+              <Form.Group controlId="formEmail" className="mt-3">
                 <Form.Label>Email</Form.Label>
                 <Field
                   name="email"
@@ -90,12 +103,14 @@ const LoginModal = ({ show, handleClose }) => {
             <Button variant="link" className="p-0">Forgot Password?</Button>
           </div>
         )}
-
       </Modal.Body>
 
       <Modal.Footer>
         <Button variant="secondary" onClick={toggleSignup}>
           {isSignup ? 'Already have an account? Login' : 'New here? Sign Up'}
+        </Button>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
         </Button>
       </Modal.Footer>
     </Modal>
