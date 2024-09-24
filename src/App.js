@@ -1,18 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import FilmsPage from './pages/FilmsPage';
+import React, { useState } from 'react';
+import Navbar from './Navbar'; // Adjust the import path as needed
+import LoginModal from './LoginModal'; // Adjust the import path as needed
 
 const App = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginClose = () => setShowLoginModal(false);
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/films" element={<FilmsPage />} />
-      </Routes>
-    </Router>
+    <div>
+      <Navbar setShowLoginModal={setShowLoginModal} />
+      
+      <LoginModal show={showLoginModal} handleClose={handleLoginClose} />
+      
+      {/* Other components like Home, BrowseByFilters, etc. can go here */}
+    </div>
   );
 };
 
