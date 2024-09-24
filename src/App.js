@@ -10,7 +10,6 @@ const App = () => {
   return (
     <div>
       <Navbar setShowLoginModal={setShowLoginModal} />
-      
       <LoginModal show={showLoginModal} handleClose={handleLoginClose} />
       
       {/* Other components like Home, BrowseByFilters, etc. can go here */}
